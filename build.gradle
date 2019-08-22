@@ -6,6 +6,15 @@
  * user guide available at https://docs.gradle.org/4.8.1/userguide/java_library_plugin.html
  */
 
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'jacoco'
+
+
+version = '1.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
@@ -25,30 +34,6 @@ dependencies {
 
 }
 
-// In this section you declare where to find the dependencies of your project
-repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
-}
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'jacoco'
-
-
-version = '1.0'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'proyecto1',
-                   'Implementation-Version': version
-    }
-}
-
 test {
 	jacoco {
 		append = false
@@ -58,6 +43,21 @@ test {
 }
 
 jacocoTestReport.dependsOn(test)
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'proyecto1',
+                   'Implementation-Version': version
+    }
+}
+
 
 
 
