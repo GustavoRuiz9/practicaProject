@@ -22,6 +22,7 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
 }
 
 // In this section you declare where to find the dependencies of your project
@@ -30,3 +31,34 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'jacoco'
+
+
+version = '1.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'proyecto1',
+                   'Implementation-Version': version
+    }
+}
+
+test {
+	jacoco {
+		append = false
+		destinationFile = file("jacoco/jacocoTest.exec")
+	}
+	reports.junitXml.destination =  file("jacoco/test-results")
+}
+
+jacocoTestReport.dependsOn(test)
+
+
+
+
